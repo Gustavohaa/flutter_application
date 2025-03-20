@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_application/providers/task_provider.dart';
+import '../model/task_model.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
+  final Function(Task) onTaskAdded;
+
+  AddTaskScreen({required this.onTaskAdded});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
+
     return Scaffold(
-      appBar: AppBar(title: Text('Adicionar Tarefa')),
+      appBar: AppBar(
+        title: Text('Adicionar Tarefa', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blueAccent,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -16,18 +23,28 @@ class AddTaskScreen extends StatelessWidget {
           children: [
             TextField(
               controller: _controller,
-              decoration: InputDecoration(labelText: 'Nome da Tarefa'),
+              decoration: InputDecoration(
+                labelText: 'Nome da Tarefa',
+                labelStyle: TextStyle(color: Colors.blueGrey[800]),
+                border: OutlineInputBorder(),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                padding: EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onPressed: () {
                 if (_controller.text.isNotEmpty) {
-                  Provider.of<TaskProvider>(context, listen: false)
-                      .addTask(_controller.text);
+                  onTaskAdded(Task(name: _controller.text));
                   Navigator.pop(context);
                 }
               },
-              child: Text('Salvar'),
+              child: Text('Salvar', style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           ],
         ),

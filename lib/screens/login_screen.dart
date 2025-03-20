@@ -8,9 +8,13 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [const Color.fromARGB(255, 163, 168, 175), const Color.fromARGB(255, 163, 168, 175)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF2C3E50),
+              Color(0xFF6D7F8C),
+              Color(0xFFB0BEC5),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: Center(
@@ -18,8 +22,16 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              
+              Image.asset(
+                'assets/icon/imgLoginScreen.png', 
+                height: 100, 
+              ),
+              SizedBox(height: 10),
+
+              
               Text(
-                'Bem-vindo!',
+                'ProjectX',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
@@ -28,6 +40,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
+
+              
               TextField(
                 decoration: InputDecoration(
                   filled: true,
@@ -39,6 +53,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+
+              
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -51,6 +67,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
+
+              
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/taskList');
@@ -64,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: Text(
                   'Entrar',
-                  style: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 163, 168, 175)),
+                  style: TextStyle(fontSize: 18, color: Color(0xFF2C3E50)),
                 ),
               ),
             ],
