@@ -31,17 +31,24 @@ dependencies:
   flutter:
     sdk: flutter
   provider: 6.1.2
+  path_provider: ^2.0.15
+  drift: ^2.13.0
+  sqlite3_flutter_libs: ^0.5.11
     
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  intl: ^0.20.2
+  google_fonts: ^6.2.1
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.3
+  drift_dev: ^2.13.0
+  build_runner: ^2.4.6
 
 
 flutter_launcher_icons:

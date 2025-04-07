@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
-import 'screens/Icon_animation.dart';
-import 'screens/login_screen.dart';
-import 'screens/task_list_screen.dart';
-import 'screens/add_task_screen.dart';
+import 'database/app_database.dart';
+import 'screens/icon_animation.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final AppDatabase db = AppDatabase();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'ProjectX',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/', 
-      routes: {
-        '/': (context) => IconAnimation(), 
-        '/login': (context) => LoginScreen(),
-        '/taskList': (context) => TaskListScreen(),
-        '/addTask': (context) => AddTaskScreen(onTaskAdded: (Task) {},), 
-      },
+      home: IconAnimation(db: db),
     );
   }
 }

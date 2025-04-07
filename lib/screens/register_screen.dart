@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../database/app_database.dart';
-import 'register_screen.dart';
-import 'task_list_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   final AppDatabase db;
-  LoginScreen({required this.db});
+  RegisterScreen({required this.db});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String? error;
 
-  void login() async {
-    final user = await widget.db.login(emailController.text, passwordController.text);
-    if (user != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => TaskListScreen(db: widget.db, userId: user.id)),
-      );
-    } else {
-      setState(() => error = "Email ou senha incorretos");
+  void register() async {
+    try {
+      await widget.db.createUser(emailController.text, passwordController.text);
+      Navigator.pop(context);
+    } catch (e) {
+      setState(() => error = "Email já cadastrado.");
     }
   }
 
@@ -59,11 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.asset('assets/icon/imgLoginScreen.png', height: 80),
                     SizedBox(height: 10),
                     Text(
-                      'Bem-vindo',
+                      'Criar Conta',
                       style: GoogleFonts.poppins(
                         fontSize: 26,
                         fontWeight: FontWeight.w600,
@@ -84,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: login,
+                        onPressed: register,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           foregroundColor: Color(0xFF2C3E50),
@@ -93,19 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: Text('Entrar', style: TextStyle(fontSize: 18)),
+                        child: Text('Registrar', style: TextStyle(fontSize: 18)),
                       ),
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => RegisterScreen(db: widget.db)),
-                          );
-                        },
+                        onPressed: () => Navigator.pop(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           foregroundColor: Color(0xFF2C3E50),
@@ -114,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: Text('Criar conta', style: TextStyle(fontSize: 18)),
+                        child: Text('Voltar ao login', style: TextStyle(fontSize: 18)),
                       ),
                     ),
                   ],

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import '../database/app_database.dart';
 import 'login_screen.dart';
 
 class IconAnimation extends StatelessWidget {
+  final AppDatabase db;
+
+  IconAnimation({required this.db});
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => LoginScreen(db: db)),
       );
     });
 
@@ -23,8 +27,8 @@ class IconAnimation extends StatelessWidget {
               width: 120,
               height: 120,
             ),
-            SizedBox(height: 20), 
-            CircularProgressIndicator( 
+            SizedBox(height: 20),
+            CircularProgressIndicator(
               color: Colors.white,
             ),
           ],
