@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/screens/login/login_screen.dart';
 import '../database/app_database.dart';
-import 'login_screen.dart';
 
 class IconAnimation extends StatelessWidget {
   final AppDatabase db;

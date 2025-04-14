@@ -34,6 +34,7 @@ dependencies:
   path_provider: ^2.0.15
   drift: ^2.13.0
   sqlite3_flutter_libs: ^0.5.11
+  http: ^0.14.0
     
 
   # The following adds the Cupertino Icons font to your application.
